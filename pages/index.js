@@ -92,7 +92,7 @@ export default function Home() {
       <div className='py-[100px]  '>
       <label className='text-white  font-extrabold ml-[45vh] 
         text-6xl'>Quickly register to be a part of our   </label>
-      <label className='text-white  font-extrabold ml-[60vh] text-6xl '> MEDWHEEL community <br></br><br></br>
+      <label className='text-white  font-extrabold ml-[60vh] text-6xl '> MEDWHEELS community <br></br><br></br>
       </label>
       <label className=' font-bold text-gray-200 mx-[75vh] text-lg ml- '> Community striving to create a better world.  </label> 
       <label className='text-gray-400  font-bold ml-[60vh] text-lg '>  We welcome all the hospitals to engineer the beautiful world along with us.
