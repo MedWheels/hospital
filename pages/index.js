@@ -12,7 +12,7 @@ export default function Home() {
     },
     {
       title: "About Us",
-      link: "#about",
+      link: "/about",
     },
     {
       title: "Services",
@@ -20,7 +20,7 @@ export default function Home() {
     },
     {
       title: "Write to us",
-      link: "/wrus",
+      link: "/wus",
     },]
     const [index ,setIndex] = useState(0)
     const [index1 ,setIndex1] = useState(1)
@@ -87,7 +87,7 @@ export default function Home() {
 
   return (<>
       <Navbar className="text-[#edf3f7] py-1  group-hover:text-blue-400" content={navBarContent} />
-      <div className="bg-[url('/backgroundIndex.jpg')] bg-cover bg-right 
+      <div className="bg-[url('/backgrounIndex.jpg')] bg-cover bg-right 
        bg-no-repeat min-h-screen ">
       <div className='py-[100px]  '>
       <label className='text-white  font-extrabold ml-[45vh] 
@@ -101,7 +101,7 @@ export default function Home() {
 
       {images.length > 0 ?
       <>
-      <div className="flex flex-row space-x-16  ">
+      <div className="flex flex-row space-x-10  ">
         <button className='bg-transparent h-20 ml-2 w-20 mt-[100px] text-4xl  text-sky-400 border-2 border-sky-400 '  onClick={handlePrev}> {str1} </button>
           <div className="relative -mt-6 bg-gray-200 w-[60vh] border-2 border-sky-400 h-[40vh] overflow-hidden rounded-xl">   
              <img  className={`absolute object-contain z-20 w-full h-full p-4  ${ trans ? 'transition duration-500 ease-linear transform -translate-x-full' : (transR ? 'animate-slideL' : "" )}`} src={images[index].name} alt=""  />
@@ -129,7 +129,7 @@ export default function Home() {
        : "no images yet"}
        
        </div>
-      <div className="h-[30vh] bg-[url('/backgroundIndex.jpg')] bg-cover py-10" >
+      <div className="h-[30vh] bg-[url('/backgrounIndex.jpg')] bg-cover py-10" >
       
                 <img
                   className="hover:scale-105 duration-200 py-5 ml-[90vh] "

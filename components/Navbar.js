@@ -1,6 +1,9 @@
 import React from "react";
 import Link from "next/link";
+import login from "../pages/login";
+import Router from "next/router"
 
+ 
 function NavBarOption({ item }) {
   return (
     <div className="px-4 py-4">
@@ -19,8 +22,8 @@ function NavBarOption({ item }) {
 function Navbar({ content }) {
   return (
     <div>
-      <div className="   h-[70px] bg-[url('/backgroundIndex.jpg')] bg-cover">
-        <div className="flex flex-row justify-between">
+      <div className="   h-[70px] bg-[url('/navbar.jpg')] bg-cover">
+        <div className="flex flex-row  ">
           <div className="ml-5 mt-1 px-2 py-2">
             <Link href="/">
               <a>
@@ -38,17 +41,24 @@ function Navbar({ content }) {
             </Link>
             
            
-          </div>    <div className="mr-60">
-          <div className="flex flex-row ">
+          </div>    <div className="mr-20">
+          <div className="flex flex-row gap-2 pl-[100vh] ">
             {content.map((item, index) => {
               return <NavBarOption className="text-sm text-[#edf3f7]   py-1 group-hover:text-blue-400" key={index} item={item} />;
             })}
-            <button className="  ml px-3 h-7 w-cover mt-4 ml-10 ring-1   bg-transparent text-sky-400 hover:bg-sky-700">Login</button></div>
+            <div className="pt-5">
+            <Link href="../pages/login">
+              <a>
+              <label className="px-3 py-2 h-7 w-cover  ml-5 ring-1   bg-transparent text-sky-400 hover:bg-sky-700">LOGIN</label>
+              </a>
+            </Link>
+            </div>
+         </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
-
+ 
+          }
 export default Navbar;
