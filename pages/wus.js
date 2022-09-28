@@ -70,12 +70,12 @@ export default function wus()
     <div className='text-center text-6xl font-poppins font-extrabold text-orange-600'>  Got a Question? </div>
     <div className='text-center text-2xl font-poppins font-extrabold text-gray-600 pt-20'>  Chat with us - Feel free to write us your question. <br></br> The only things we require to reach you is your name and email.  </div>
     {/* </div>  */}
-    <input className="px-2 mb-2 p-1 mt-10  mx-[64vh] 
+    <input className="px-2 mb-2 p-1 mt-10  ml-[64vh] 
     text-center font-poppins font-extrabold placeholder placeholder-gray-400 text-2xl  ring-2 
     ring-gray-200 rounded-sm  w-[745px] h-[60px]  
      bg-white text-black"  placeholder={"Your Name"}></input>
 
-    <input className="px-2 mb-2 p-1 mt-10  mx-[64vh] font-poppins font-extrabold text-gray-
+    <input className="px-2 mb-2 p-1 mt-10  ml-[64vh] font-poppins font-extrabold text-gray-
     text-center placeholder placeholder-gray-400 text-2xl  ring-2 
     ring-gray-200 rounded-sm  w-[745px] h-[60px]  
      bg-white text-black"  placeholder={"Your email - test@gmail.com"}></input>
@@ -106,7 +106,7 @@ export default function wus()
                   "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
               }}
             />  </div> */}
-    <QuillNoSSRWrapper className=" mb-2 p-1 mt-10 w-[745px]  mx-[64vh] " modules={modules} formats={formats} theme="snow" />
+    <QuillNoSSRWrapper className=" mb-2 p-1 mt-10 w-[745px]  ml-[64vh] " modules={modules} formats={formats} theme="snow" />
 
     <div className="justify-items-right  mt-40 pl-[100vh]">
           <div className="relative w-full max-w-lg  py-49">
