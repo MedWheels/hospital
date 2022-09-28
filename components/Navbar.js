@@ -47,7 +47,7 @@ function Navbar({ content }) {
               return <NavBarOption className="text-sm text-[#edf3f7]   py-1 group-hover:text-blue-400" key={index} item={item} />;
             })}
             <div className="pt-5">
-            <Link href="../pages/login">
+            <Link href="/login">
               <a>
               <label className="px-3 py-2 h-7 w-cover  ml-5 ring-1   bg-transparent text-sky-400 hover:bg-sky-700">LOGIN</label>
               </a>
