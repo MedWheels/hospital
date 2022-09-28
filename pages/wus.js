@@ -54,11 +54,11 @@ export default function wus()
     return(
     <> 
 
-    <div className="mt-40 text-white">increasing margin</div>
+    <div className="  text-white">increasing margin</div>
     <div className="bg-white min-h-screen w-full">
 
  
-    <div className="justify-items-stretch pl-40 pt-40  ">
+    <div className="justify-items-stretch pl-40 pt-20  ">
           <div className="relative w-full max-w-lg  py-49">
             <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
             <div className="absolute top-0 right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
@@ -106,7 +106,10 @@ export default function wus()
                   "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
               }}
             />  </div> */}
-    <QuillNoSSRWrapper className=" mb-2 p-1 mt-10 w-[745px]  ml-[64vh] " modules={modules} formats={formats} theme="snow" />
+
+
+            
+    <QuillNoSSRWrapper className=" mb-2 p-1 mt-10 w-[745px] h-[250px]  ml-[64vh] " modules={modules} formats={formats} theme="snow" />
 
     <div className="justify-items-right  mt-40 pl-[100vh]">
           <div className="relative w-full max-w-lg  py-49">

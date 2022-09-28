@@ -8,10 +8,7 @@ import router from 'next/router';
 
 export default function Home() {
   const navBarContent = [
-    {
-      title: "Home",
-      link: "/",
-    },
+    
     {
       title: "About Us",
       link: "/about",
