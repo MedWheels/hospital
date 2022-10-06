@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import login from "../pages/login";
-import register from "../pages/register";
+import Register from "../pages/register";
 import Router from "next/router"
 
  
@@ -43,17 +42,11 @@ function Navbar({ content }) {
             
            
           </div>    <div className="mr-20">
-          <div className="flex flex-row gap-2 pl-[100vh] ">
+          <div className="flex flex-row gap-2 pl-[130vh] ">
             {content.map((item, index) => {
               return <NavBarOption className="text-sm text-[#edf3f7]   py-1 group-hover:text-blue-400" key={index} item={item} />;
             })}
-            <div className="pt-5">
-            <Link href="/login">
-              <a>
-              <label className="px-3 py-2 h-7 w-cover  ml-5 ring-1   bg-transparent text-sky-400 hover:bg-sky-700">LOGIN</label>
-              </a>
-            </Link>
-            </div>
+             
          </div>
           </div>
         </div>
