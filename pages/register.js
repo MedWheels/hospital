@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Router from "next/router";
-import Navbar from "../components/Navbar3";
+import Navbar from "../components/Navbar2";
 
 function register({}) {
     const [view, setView] = useState(false);
@@ -97,7 +97,7 @@ function register({}) {
                       </div>
                   </div>
                   
-                    <button type="submit" class=" ring-1 ring-sky-400 text-sky-400 hover:bg-sky-400 hover:text-black w-full text-black bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Register  </button>
+                    <button type="submit" class=" ring-1 ring-sky-400 text-sky-400 hover:bg-sky-400 hover:text-black w-full   bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Register  </button>
 
                   <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                       Already have an account? <a href="/login" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a>

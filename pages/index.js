@@ -86,7 +86,7 @@ export default function Home() {
 
   return (<>
       <Navbar className="text-[#edf3f7] py-1  group-hover:text-blue-400" content={navBarContent} />
-      <div className="bg-[url('/backgrounIndex.jpg')] bg-cover bg-right 
+      <div className="bg-[url('/backgrounIndex.jpg')] bg-cover  
        bg-no-repeat min-h-screen ">
       <div className='py-[100px]  '>
       <label className='text-white  font-extrabold ml-[45vh] 

@@ -1,8 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import login from "../pages/login";
-import Router from "next/router"
-
+ 
  
 function NavBarOption({ item }) {
   return (

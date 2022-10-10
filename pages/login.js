@@ -1,8 +1,10 @@
 // import axios from "axios";
 import React, { useState } from "react";
-import Link from "next/link";
+ 
 import Router from "next/router";
 import Navbar from "../components/Navbar2";
+import Link from "next/link";
+
 
 function Login({}) {
 //   const [email, setEmail] = useState("");
@@ -148,10 +150,16 @@ function Login({}) {
                 placeholder={"Password"}
               ></input>
             </div>
+            <Link href="/dashboard">
+            <a>
             <input
               type="submit"
-              className=" bg[url('/navbar.jpg')] ring-1 ring-sky-400 text-sky-400 hover:bg-sky-400 hover:text-black font-bold py-2 px-4 rounded-sm mx-[18vw]"
-            ></input>
+             
+              className=" bg[url('/navbar.jpg')] ring-1 ring-sky-400
+               text-sky-400 hover:bg-sky-400 hover:text-black font-bold py-2 px-4 rounded-sm ml-[17vw]">
+
+            </input>
+            </a></Link>
           </form>
         </div>
       </div>
