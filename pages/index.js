@@ -1,10 +1,9 @@
-import Head from 'next/head'
-import Image from 'next/image'
+ 
 import Navbar from "../components/Navbar"
 import { useEffect,useState } from 'react'
 import Typewriter from "typewriter-effect";
 import Link from "next/link";
-import router from 'next/router';
+ 
 
 export default function Home() {
   const navBarContent = [
@@ -21,6 +20,9 @@ export default function Home() {
       title: "Write to us",
       link: "/wus",
     },]
+
+
+    
     const [index ,setIndex] = useState(0)
     const [index1 ,setIndex1] = useState(1)
     const [trans , setTrans] = useState(false)

@@ -17,7 +17,7 @@ export default function dashboard()
         </div>
             <h2 className="text-orange-500 text-4xl font-extrabold text-center"> DASHBOARD</h2>
             <button onClick={()=> setShowModal(true)} className="text-center p-2 rounded-md text-orange-500 border-orange-400 ml-[100vh] mt-3  border-2">Testing</button>
-            {JSON.stringify(showModal)}
+      
        <Modal show={showModal} onClose={()=>setShowModal(false)} >
 
        ALERT ALERT ALERT ALERT ALERT ALERT ALERT ALERT
