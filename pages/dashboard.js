@@ -1,12 +1,26 @@
  
 import { useState,useEffect } from "react";
+import Navbar from "../components/Navbar3"
 import Modal  from "../components/modal";
 export default function dashboard()
 {
     const [showModal,setShowModal] = useState(false);
 
+    const navBarContent = [
+    
+      {
+        title: "FAQ's",
+        link: "/wus",
+      },
+       
+      {
+        title: "Log Out",
+        link: "#",
+      },]
+
     return(
         <>
+        <Navbar className="text-orange-400 py-1 text-2xl group-hover:text-red-400" content={navBarContent} />
         <div className="  bg-cover min-h-screen w-full text-black">
         <div className="justify-items-stretch pl-40 pt-20  ">
           <div className="relative w-full max-w-lg  py-49">

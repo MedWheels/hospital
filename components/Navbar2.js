@@ -8,7 +8,7 @@ function NavBarOption({ item }) {
         
       <Link href={item.link}>
         <a>
-          <div className="text-sm text-[#edf3f7] py-1 group-hover:text-blue-400 ">
+          <div className="text-lg text-[#edf3f7] py-1 group-hover:text-blue-400 ">
             {item.title}
           </div>
         </a>
@@ -40,7 +40,7 @@ function Navbar({ content }) {
             
            
           </div>    <div className="mr-20">
-          <div className="flex flex-row gap-2 pl-[130vh] ">
+          <div className="flex flex-row gap-2 pl-[140vh] ">
             {content.map((item, index) => {
               return <NavBarOption className="text-sm text-[#edf3f7]   py-1 group-hover:text-blue-400" key={index} item={item} />;
             })}

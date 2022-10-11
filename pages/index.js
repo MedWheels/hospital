@@ -8,10 +8,7 @@ import Link from "next/link";
 export default function Home() {
   const navBarContent = [
     
-    {
-      title: "About Us",
-      link: "/about",
-    },
+    
     {
       title: "Services",
       link: "/services",
@@ -135,17 +132,6 @@ export default function Home() {
        : "no images yet"}
        
        </div>
-      <div className="h-[30vh] bg-[url('/backgrounIndex.jpg')] bg-cover py-10" >
-      
-                <img
-                  className="hover:scale-105 duration-200 py-5 ml-[90vh] "
-                  color="#1da1f2"
-                  src="/ambulance.svg"
-                  alt="ambulance image"
-                  height={60}
-                  width={60}
-                ></img>
-                <label className="text-white px-3  font-extrabold text-4xl ml-[80vh] "> MedWheels</label></div>    
      
  
       </>

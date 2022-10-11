@@ -66,51 +66,33 @@ export default function wus()
           </div>
         </div>
   
-    {/* <div className="ring-2 ml-[50vh] w-[100vh]"> */}
-    <div className='text-center text-6xl font-poppins font-extrabold text-orange-600'>  Got a Question? </div>
-    <div className='text-center text-2xl font-poppins font-extrabold text-gray-600 pt-20'>  Chat with us - Feel free to write us your question. <br></br> The only things we require to reach you is your name and email.  </div>
+   
+
+    
+
+   <div className="flex flex-row space-x-10  ">
+    <div className="border-2 border-black ">
+    <div className='text-center text-6xl font-poppins font-extrabold text-orange-600 '>  About us <br/> </div>
+    </div>
+     <div className="border-2 border-black">
+    <div className='  text-6xl font-poppins font-extrabold ml-[140px] text-orange-600'>  Got a Question? </div>
+    <div className='  text-2xl font-poppins font-extrabold text-gray-600 ml-[140px] pt-20'>  Chat with us - Feel free to write us your question. <br></br> The only things we require to reach you is your name and email.  </div>
     {/* </div>  */}
-    <input className="px-2 mb-2 p-1 mt-10  ml-[64vh] 
+    <input className="px-2 mb-2 p-1 mt-10   
     text-center font-poppins font-extrabold placeholder placeholder-gray-400 text-2xl  ring-2 
     ring-gray-200 rounded-sm  w-[745px] h-[60px]  
      bg-white text-black"  placeholder={"Your Name"}></input>
 
-    <input className="px-2 mb-2 p-1 mt-10  ml-[64vh] font-poppins font-extrabold text-gray-
+    <input className="px-2 mb-2 p-1 mt-10  font-poppins font-extrabold text-gray-
     text-center placeholder placeholder-gray-400 text-2xl  ring-2 
     ring-gray-200 rounded-sm  w-[745px] h-[60px]  
      bg-white text-black"  placeholder={"Your email - test@gmail.com"}></input>
 
-      {/* <div className=" ml-20 w-[110vh]  "> */}
-            {/* <Editor
-              tinymceScriptSrc="/tinymce_6.2.0/tinymce/js/tinymce/tinymce.min.js"
-              // onInit={(evt, editor) => (editorRef.current = editor)}
-              initialValue="Type ur questions or feedback"
-              init={{
-                selector: "textarea",
-                content_css: "dark",
-                skin: "oxide-dark",
-                height: 500,
-
-                menubar: true,
-                plugins: [
-                  "advlist autolink lists link image charmap print preview anchor",
-                  "searchreplace visualblocks code fullscreen",
-                  "insertdatetime media table paste code help wordcount",
-                ],
-                toolbar:
-                  "undo redo | formatselect | " +
-                  "bold italic backcolor | alignleft aligncenter " +
-                  "alignright alignjustify | bullist numlist outdent indent | " +
-                  "removeformat | help",
-                content_style:
-                  "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
-              }}
-            />  </div> */}
-
+     
 
             
-    <QuillNoSSRWrapper className=" mb-2 p-1 mt-10 w-[745px] h-[250px]  ml-[64vh] " modules={modules} formats={formats} theme="snow" />
-
+    <QuillNoSSRWrapper className=" mb-2 p-1 mt-10 w-[745px] h-[250px]   " modules={modules} formats={formats} theme="snow" />
+    </div>
     <div className="justify-items-right  mt-40 pl-[100vh]">
           <div className="relative w-full max-w-lg  py-49">
             <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
@@ -118,8 +100,10 @@ export default function wus()
             <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
           </div>
         </div>
-        </div>
        
+        
+        </div>
+       </div>
         </>)
     
 }
