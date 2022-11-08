@@ -1,27 +1,44 @@
- 
+import { getAuth,signOut,} from "firebase/auth";
+import {verifyIdToken} from "../services/firebaseAdmin";
+import firebaseClient from "../services/firebase";
 import { useState,useEffect } from "react";
 import Navbar from "../components/Navbar3"
 import Modal  from "../components/modal";
-export default function dashboard()
+import nookies from 'nookies';
+
+
+
+function dashboard({session})
 {
-    const [showModal,setShowModal] = useState(false);
+  const app = firebaseClient();
+  const [showModal,setShowModal] = useState(false);
+  const auth = getAuth(app);
+  console.log(auth.currentUser);
+  const navBarContent = [
+    {
+      title: "FAQ's",
+      link: "/wus",
+    },
+    {
+      title: "Log Out",
+      link: "#",
+    },
+  ];
 
-    const navBarContent = [
-    
-      {
-        title: "FAQ's",
-        link: "/wus",
-      },
-       
-      {
-        title: "Log Out",
-        link: "#",
-      },]
+  async function logout() {
+    signOut(auth).then(() => {
+      console.log("Logged out.")
+      window.location.href = "/login";
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
 
+  if(session){
     return(
-        <>
-        <Navbar className="text-orange-400 py-1 text-2xl group-hover:text-red-400" content={navBarContent} />
-        <div className="  bg-cover min-h-screen w-full text-black">
+      <>
+      <Navbar className="text-orange-400 py-1 text-2xl group-hover:text-red-400" content={navBarContent} />
+      <div className="  bg-cover min-h-screen w-full text-black">
         <div className="justify-items-stretch pl-40 pt-20  ">
           <div className="relative w-full max-w-lg  py-49">
             <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
@@ -29,18 +46,43 @@ export default function dashboard()
             <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
           </div>
         </div>
-            <h2 className="text-orange-500 text-4xl font-extrabold text-center"> DASHBOARD</h2>
-            <button onClick={()=> setShowModal(true)} className="text-center p-2 rounded-md text-orange-500 border-orange-400 ml-[100vh] mt-3  border-2">Testing</button>
+        
+        <h2 className="text-orange-500 text-4xl font-extrabold text-center"> DASHBOARD</h2>
+        <h3 className="text-orange-500 text-4xl font-extrabold text-center">Hello !</h3>
+        {/* <h3 className="text-orange-500 text-4xl font-extrabold text-center">Hello {auth.currentUser}!</h3> */}
+        <button onClick={()=> setShowModal(true)} className="text-center p-2 rounded-md text-orange-500 border-orange-400 ml-[100vh] mt-3  border-2">Testing</button>
+        <button onClick={()=> logout()} className="text-center p-2 rounded-md text-orange-500 border-orange-400 ml-[100vh] mt-3  border-2">LOGOUT</button>
       
-       <Modal show={showModal} onClose={()=>setShowModal(false)} >
-
-       ALERT ALERT ALERT ALERT ALERT ALERT ALERT ALERT
-
-       </Modal>
-       
-       
-       
-        </div>
+        <Modal show={showModal} onClose={()=>setShowModal(false)} >
+          This is a test Notification.
+        </Modal>
+      </div>
         </>
-    )
+    );
+  }
+  else {
+    return <h2 className="text-orange-500 text-4xl font-extrabold text-center"> Loading..</h2>
+  }
+    
 }
+
+
+export async function getServerSideProps(context) {
+  try {
+    const cookies = nookies.get(context);
+    const token = await verifyIdToken(cookies.token);
+    const {uid,email} = token;
+    return {
+      props: {
+        session: `Your email is ${email} and uid is ${uid}.`
+      },
+    };
+  } catch (error) {
+    context.res.writeHead(302,{location: "/login"});
+    context.res.end();
+    return {props: []};
+  }
+}
+
+
+export default dashboard;

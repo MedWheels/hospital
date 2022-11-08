@@ -1,16 +1,14 @@
 // import axios from "axios";
 import React, { useState } from "react";
 // import {useRouter} from "next/router";
-import { useAuth } from "../auth";
+import { useAuth } from "../services/auth";
 import dashboard from "./dashboard"; 
 import Navbar from "../components/Navbar2";
 import Link from "next/link";
-import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
-import { unstable_renderSubtreeIntoContainer } from "react-dom";
+import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 import "firebase/auth";
 import firebase from "firebase/app"
-import firebaseClient from "../firebase";
-import { async } from "@firebase/util";
+import firebaseClient from "../services/firebase";
 
 
 
@@ -21,19 +19,53 @@ function Login({}) {
   const [password, setPassword] = useState("");
 
   const {user} = useAuth(); 
-  firebaseClient();
+  const app = firebaseClient();
   const [view, setView] = useState(false);
-  const auth= getAuth();
+  const auth= getAuth(app);
  
  
-  const signup = () => {
-    createUserWithEmailAndPassword(auth,email,password)
-    .then(()=>{
-        console.log('happening');
-        router.push('/dashboard');
-    })
+  // const signup = () => {
+  //   createUserWithEmailAndPassword(auth,email,password)
+  //   .then(()=>{
+  //       console.log('happening');
+  //       router.push('/dashboard');
+  //   })
+  // }
+
+
+  const navBarContent = [
+   
+    {
+      title: "About Us",
+      link: "/about",
+    },
+    {
+      title: "Write to us",
+      link: "/wus",
+    },
+    {
+      title: "Register",
+      link: "/register",
+    },
+  ];
+
+
+  async function signIn() {
+    
+    console.log(email+","+password); 
+    if (!auth){
+      alert("Auth problem");
+      return;
+    }
+    await signInWithEmailAndPassword(auth,email,password).then(() => {
+        window.location.href = "/dashboard";
+    }).catch((error) =>{
+        const message = error.message
+        console.log("An error occured: "+message);
+    });
   }
-//   async function onSubmit() {
+          
+    //   async function onSubmit() {
 //     if (email === " " || password === " ") {
 //       alert("Please enter your email and password");
 //     }
@@ -74,35 +106,6 @@ function Login({}) {
     // console.log("response_data", data);
 //   }
 
-  const navBarContent = [
-   
-    {
-      title: "About Us",
-      link: "/about",
-    },
-    {
-      title: "Write to us",
-      link: "/wus",
-    },
-    {
-      title: "Register",
-      link: "/register",
-    },
-  ];
-    async function f1(){
-      
-          console.log(email); 
-
-          await firebase.auth().signInWithEmailAndPassword(email,password)
-          
-          .then(function()
-          {
-            window.location.href = "/dashboard";
-          }).catch(function(error)
-          {
-            const message = error.message
-            alert("An error occured"+message)
-          })} 
   return (
     <div>
       <Navbar content={navBarContent} />
@@ -202,8 +205,11 @@ function Login({}) {
             {/* <a> */}
             <button
               
-              onClick={ f1
-               }
+              onClick={ (e) => {
+                e.preventDefault();
+                signIn();
+              }
+              }
               disabled={email === "" || password === ""}
               className=" bg[url('/navbar.jpg')] ring-1 ring-sky-400 h-[40px] w-[350px]
                 text-sky-400 hover:bg-sky-400 hover:text-black font-bold py-2 px-4 rounded-sm ml-[10vw]">

@@ -18,7 +18,7 @@
     "react-dom": "18.2.0",
     "react-quill": "^2.0.0",
     "tinymce": "^6.2.0",
-    "typewriter": "^8.0.4",
+    "typewriter": "^8.0.8",
     "typewriter-effect": "^2.19.0",
     "yarn": "^1.22.19"
   },

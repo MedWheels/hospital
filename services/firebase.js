@@ -1,8 +1,7 @@
  
-import { initializeApp } from "firebase/app";
+import { firebase, initializeApp, getApps } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 import { getAuth } from 'firebase/auth'
-import firebase from "firebase/app";
 
 const firebaseConfig = {
   apiKey:  process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -15,18 +14,18 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
 export default function firebaseClient()
 {
-
+  if (!getApps().length){
+    return initializeApp(firebaseConfig);
+  }
   // if(typeof window !== "undefined")
   // {
   //   if("measurementId" in firebaseConfig)
   //   {const analytics = getAnalytics(app);
   //   }
   // }
-  const auth = getAuth(app)
+  // const auth = getAuth(app)
 
 }
 

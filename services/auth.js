@@ -6,10 +6,11 @@ import "firebase/auth";
 import {getAuth,  onIdTokenChanged } from 'firebase/auth';
 
 const AuthContext = createContext({});
-const auth = getAuth();
+// const auth = getAuth();
 export const AuthProvider = ({children}) => 
 {
-    firebaseClient();
+    const app = firebaseClient();
+    const auth = getAuth(app);
     const [user, setUser] = useState(null);
     useEffect(() => {
         return(onIdTokenChanged(auth,async (user)=>
@@ -18,6 +19,7 @@ export const AuthProvider = ({children}) =>
             {
                 setUser(null);
                 nookies.set(undefined, "token", "", {});
+                // window.location.href = "/login";
                 return;
             }
             const token = await user.getIdToken();
@@ -25,8 +27,7 @@ export const AuthProvider = ({children}) =>
             nookies.set(undefined,"token",token,{});
 
         }));
-    },
-    []);
+    },[]);
     return (<AuthContext.Provider value={{user}}>{children}</AuthContext.Provider>
 )
 };
