@@ -19,7 +19,7 @@ export default function Modal({show, onClose, children})
             <div className={styles.modal}>
                 <div className={styles.header}>
                     <a href="#" onClick={handleClose}>
-                    ALERT ALERT ALERT ALERT ALERT ALERT ALERT ALERT ALERT ALERT ALERT ALERT ALERT ALERT ALERT<br></br>
+                    Notification<br></br>
                     <div className={styles.body}>{children}</div>
                     <div className="place-content-center">
                     <button className="text-center p-2 rounded-md text-orange-500 border-orange-400  mt-3  border-2">Close</button>
