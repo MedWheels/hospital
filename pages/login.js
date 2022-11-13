@@ -2,13 +2,11 @@
 import React, { useState } from "react";
 // import {useRouter} from "next/router";
 import { useAuth } from "../services/auth";
-import dashboard from "./dashboard"; 
 import Navbar from "../components/Navbar2";
-import Link from "next/link";
 import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 import "firebase/auth";
-import firebase from "firebase/app"
-import firebaseClient from "../services/firebase";
+import {app, } from "../services/firebase-messaging-sw";
+// import firebaseClient from "../firebase";
 
 
 
@@ -19,7 +17,6 @@ function Login({}) {
   const [password, setPassword] = useState("");
 
   const {user} = useAuth(); 
-  const app = firebaseClient();
   const [view, setView] = useState(false);
   const auth= getAuth(app);
  

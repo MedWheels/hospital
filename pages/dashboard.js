@@ -1,10 +1,11 @@
 import { getAuth,signOut,} from "firebase/auth";
 import {verifyIdToken} from "../services/firebaseAdmin";
-import firebaseClient from "../services/firebase";
+import { getFCMToken,  messaging, app } from '../services/firebase-messaging-sw';
 import { useState,useEffect } from "react";
 import Navbar from "../components/Navbar3"
 import Modal  from "../components/modal";
 import nookies from 'nookies';
+import { getMessaging, onMessage } from 'firebase/messaging';
 
 
 
@@ -25,6 +26,8 @@ function dashboard({session})
     },
   ];
 
+  
+
   async function logout() {
     signOut(auth).then(() => {
       console.log("Logged out.")
@@ -35,6 +38,17 @@ function dashboard({session})
   }
 
   if(session){
+    //recieve notifications
+    // const messaging = messaging;
+    getFCMToken();
+
+    onMessage(messaging, (payload) => {
+      console.log('Message received. ', payload);
+      alert(payload);
+      // ...
+    });
+
+
     return(
       <>
       <Navbar className="text-orange-400 py-1 text-2xl group-hover:text-red-400" content={navBarContent} />
