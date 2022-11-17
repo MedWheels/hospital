@@ -2,13 +2,17 @@ import React from "react";
 import { getAuth,onAuthStateChanged,signOut,} from "firebase/auth";
 import {verifyIdToken} from "../utils/firebaseAdmin";
 // import {  } from '../services/firebase-messaging-sw';
-import { useState,useEffect } from "react";
+import { useState,useEffect, useRef } from "react";
 import Navbar from "../components/Navbar3"
 import Modal  from "../components/modal";
 // import { useNavigate, } from "react-router-dom";
 import { useRouter } from "next/router";
 import nookies from 'nookies';
-import {app} from '../utils/firebase'
+import { app } from '../utils/firebase'
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import { getMessaging, onMessage } from 'firebase/messaging';
 import { useAuth } from "../utils/auth";
 
@@ -17,6 +21,7 @@ import { useAuth } from "../utils/auth";
 function Dashboard({session})
 {
   // const app = ;
+  const [editbool,setEditBool] = useState(false);
   const [showModal,setShowModal] = useState(false);
   // const navigate = useNavigate();
   const {user} = useAuth();
@@ -47,6 +52,47 @@ function Dashboard({session})
     })
   }
 
+
+
+
+
+
+  //data related
+
+  const gridRef = useRef();
+  var [table_data, settabledata] = useState([
+    
+    {
+      slNo: "1", ambulanceDriver: "Vishal.B", vehicleNumber: "KA 02 E5 23",
+      pickupCoordinates: "[-123.23323232,32.32323]", status:"Active", severity:"High"
+    },
+    {
+      slNo: "2", ambulanceDriver: "Vishal.A", vehicleNumber: "KA 01 E5 23",
+      pickupCoordinates: "[-123.23323232,32.32323]", status:"Active", severity:"Low"
+    },
+    {
+      slNo: "3", ambulanceDriver: "Vishal.R", vehicleNumber: "KA 03 E5 23",
+      pickupCoordinates: "[-123.23323232,32.32323]", status:"Passive", severity:"Low"
+    }
+  ])
+  var [Show_table, setShow_table] = useState(false)
+  const [column_Table, setcolumn_Table] = useState(
+      
+    [
+     
+      
+        { field: "slNo", headerName: "Serial Number", width: 200, resizable: true, checkboxSelection: true },
+        { field: "ambulanceDriver", headerName: "Ambulance Driver", width: 200, resizable: true },
+        { field: "vehicleNumber", headerName: "VehicleNumber", width: 200, resizable: true },
+        { field: "pickupCoordinates", headerName: "Pickup Coordinates", width: 200, resizable: true },
+        { field: "status", headerName: "Status", width: 200, resizable: true },
+        { field: "severity", headerName: "Severity", width: 200, resizable: true },
+      
+      
+    ]
+  )
+ 
+  
   if(session){
     //recieve notifications
     // const messaging = messaging;
@@ -94,7 +140,20 @@ function Dashboard({session})
       
         <Modal show={showModal} onClose={()=>setShowModal(false)} >
           This is a test Notification.
-        </Modal>
+          </Modal>
+          
+            <div className=" ag-theme-alpine   text-center pt-10 pl-20 text-blue-800 h-[50vh] w-[200vh]">
+                <AgGridReact
+                  ref={gridRef}   
+                  className='pt-2 text-center'
+                  rowData={table_data}
+                  columnDefs={column_Table}
+                  rowHeight={50}
+                  defaultColDef={{editable: true, filter: true, resizable: true, floatingFilter:true, sortable:true , filter:true,flex:1}}
+                  rowSelection='multiple'
+                >
+                </AgGridReact>
+              </div> 
       </div>
         </>
     );
