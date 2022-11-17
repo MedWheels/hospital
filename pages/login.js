@@ -1,11 +1,13 @@
 // import axios from "axios";
 import React, { useState } from "react";
 // import {useRouter} from "next/router";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../utils/auth";
 import Navbar from "../components/Navbar2";
 import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 import "firebase/auth";
 import { app } from "../utils/firebase";
+import { useRouter } from "next/router";
 
 
 
@@ -14,7 +16,8 @@ function Login({}) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  // const navigate = useNavigate();
+  const router = useRouter();
   const {user} = useAuth(); 
   const [view, setView] = useState(false);
   const auth= getAuth(app);
@@ -54,7 +57,8 @@ function Login({}) {
       return;
     }
     await signInWithEmailAndPassword(auth,email,password).then(() => {
-        window.location.href = "/dashboard";
+      // navigate("/dashboard");
+      router.push("/dashboard");
     }).catch((error) =>{
         const message = error.message
         console.log("An error occured: "+message);

@@ -1,22 +1,28 @@
-import { getAuth,signOut,} from "firebase/auth";
+import React from "react";
+import { getAuth,onAuthStateChanged,signOut,} from "firebase/auth";
 import {verifyIdToken} from "../utils/firebaseAdmin";
 // import {  } from '../services/firebase-messaging-sw';
 import { useState,useEffect } from "react";
 import Navbar from "../components/Navbar3"
 import Modal  from "../components/modal";
+// import { useNavigate, } from "react-router-dom";
+import { useRouter } from "next/router";
 import nookies from 'nookies';
 import {app} from '../utils/firebase'
-
 import { getMessaging, onMessage } from 'firebase/messaging';
+import { useAuth } from "../utils/auth";
 
 
 
-function dashboard({session})
+function Dashboard({session})
 {
   // const app = ;
   const [showModal,setShowModal] = useState(false);
-
-  // const auth = getAuth(app);
+  // const navigate = useNavigate();
+  const {user} = useAuth();
+  const router = useRouter();
+  const auth = getAuth(app);
+  
   // console.log("user: "+auth.currentUser);
   const navBarContent = [
     {
@@ -32,9 +38,10 @@ function dashboard({session})
   
 
   async function logout() {
-    signOut(getAuth()).then(() => {
-      console.log("Logged out.")
-      window.location.href = "/login";
+    signOut(getAuth()).then((auth) => {
+      console.log("Logged out from: "+toString(auth))
+      // navigate("/login");
+      router.replace("/login");
     }).catch((error) => {
       console.log(error);
     })
@@ -51,6 +58,21 @@ function dashboard({session})
     //   // ...
     // });
 
+    if(user) console.log(user.email);
+
+
+    // onAuthStateChanged(auth, (user) => {
+    //   if (user) {
+    //     // User is signed in, see docs for a list of available properties
+    //     // https://firebase.google.com/docs/reference/js/firebase.User
+    //     console.log(user.email)
+    //     // ...
+    //   } else {
+    //     // User is signed out
+    //     // ...
+    //     console.log("nobody is signed in bruh.")
+    //   }
+    // });
 
     return(
       <>
@@ -89,7 +111,7 @@ export async function getServerSideProps(context) {
     const cookies = nookies.get(context);
     const token = await verifyIdToken(cookies.token);
     const {uid,email} = token;
-    console.log("current user: "+getAuth(app).currentUser);
+    // console.log("current user: "+getAuth(app).currentUser);
     return {
       props: {
         session: `Your email is ${email} and uid is ${uid}.`
@@ -103,4 +125,4 @@ export async function getServerSideProps(context) {
 }
 
 
-export default dashboard;
+export default Dashboard;

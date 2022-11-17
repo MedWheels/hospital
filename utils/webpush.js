@@ -33,6 +33,7 @@ const firebaseCloudMessaging = {
   
 		  //if FCM token is already there just return the token
 		  if (tokenInLocalForage !== null) {
+			console.log("webpush: returning old token from localforage.");
 			return tokenInLocalForage;
 		  }
   
@@ -50,7 +51,7 @@ const firebaseCloudMessaging = {
 			}
 		  }
 		} catch (error) {
-		  console.error("webpush error"+error);
+		  console.error("webpush error: "+error);
 		  return null;
 		}
 	},

@@ -10,7 +10,7 @@ export const AuthProvider = ({children}) =>
 {
     // const app = firebaseClient();
     const auth = getAuth(app);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState();
     useEffect(() => {
         return(onIdTokenChanged(auth,async (user)=>
         {

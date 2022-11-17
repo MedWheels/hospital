@@ -1,8 +1,11 @@
 import '../styles/globals.css';
 import { firebaseCloudMessaging } from '../utils/webpush';
-import { getMessaging, getToken, onMessage } from 'firebase/messaging';
+import { getMessaging, getToken, onMessage, onBackgroundMessage } from 'firebase/messaging';
 import { useEffect } from 'react';
 import { AuthProvider } from '../utils/auth';
+// import { Router } from 'next/router';
+
+// import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 
 function MyApp({ Component, pageProps }) {
@@ -46,7 +49,7 @@ function MyApp({ Component, pageProps }) {
           notificationOptions);
       });
     }
-  });
+  }, []);
 
   useEffect(() => {
     registerServiceWorker();
@@ -55,7 +58,7 @@ function MyApp({ Component, pageProps }) {
       if (typeof global.navigator === 'undefined') global.navigator = {};
       if ("serviceWorker" in navigator) {
         try {
-          const registration = await navigator.serviceWorkerContainer.register("../public/firebase-messaging-sw.js", {
+          const registration = await navigator.serviceWorker.register("../public/firebase-messaging-sw.js", {
             scope: "/",
           });
           if (registration.installing) {
@@ -73,12 +76,13 @@ function MyApp({ Component, pageProps }) {
     };
 
 
-  });
+  }, []);
 
   return (  <>
-  <AuthProvider>
-  <Component {...pageProps} /> 
-  </AuthProvider>
+    <AuthProvider>
+      <Component {...pageProps} /> 
+    </AuthProvider>
+  
   </>
 )}
 
