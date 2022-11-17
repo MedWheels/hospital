@@ -1,12 +1,11 @@
 // import axios from "axios";
 import React, { useState } from "react";
 // import {useRouter} from "next/router";
-import { useAuth } from "../services/auth";
+import { useAuth } from "../utils/auth";
 import Navbar from "../components/Navbar2";
 import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 import "firebase/auth";
-import {app, } from "../services/firebase-messaging-sw";
-// import firebaseClient from "../firebase";
+import { app } from "../utils/firebase";
 
 
 

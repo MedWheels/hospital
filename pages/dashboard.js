@@ -1,20 +1,23 @@
 import { getAuth,signOut,} from "firebase/auth";
-import {verifyIdToken} from "../services/firebaseAdmin";
-import { getFCMToken,  messaging, app } from '../services/firebase-messaging-sw';
+import {verifyIdToken} from "../utils/firebaseAdmin";
+// import {  } from '../services/firebase-messaging-sw';
 import { useState,useEffect } from "react";
 import Navbar from "../components/Navbar3"
 import Modal  from "../components/modal";
 import nookies from 'nookies';
+import {app} from '../utils/firebase'
+
 import { getMessaging, onMessage } from 'firebase/messaging';
 
 
 
 function dashboard({session})
 {
-  const app = firebaseClient();
+  // const app = ;
   const [showModal,setShowModal] = useState(false);
-  const auth = getAuth(app);
-  console.log(auth.currentUser);
+
+  // const auth = getAuth(app);
+  // console.log("user: "+auth.currentUser);
   const navBarContent = [
     {
       title: "FAQ's",
@@ -29,7 +32,7 @@ function dashboard({session})
   
 
   async function logout() {
-    signOut(auth).then(() => {
+    signOut(getAuth()).then(() => {
       console.log("Logged out.")
       window.location.href = "/login";
     }).catch((error) => {
@@ -40,13 +43,13 @@ function dashboard({session})
   if(session){
     //recieve notifications
     // const messaging = messaging;
-    getFCMToken();
+    // getFCMToken();
 
-    onMessage(messaging, (payload) => {
-      console.log('Message received. ', payload);
-      alert(payload);
-      // ...
-    });
+    // onMessage(messaging, (payload) => {
+    //   console.log('Message received. ', payload);
+    //   alert(payload);
+    //   // ...
+    // });
 
 
     return(
@@ -86,6 +89,7 @@ export async function getServerSideProps(context) {
     const cookies = nookies.get(context);
     const token = await verifyIdToken(cookies.token);
     const {uid,email} = token;
+    console.log("current user: "+getAuth(app).currentUser);
     return {
       props: {
         session: `Your email is ${email} and uid is ${uid}.`

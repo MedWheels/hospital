@@ -1,16 +1,15 @@
 import  React, { useEffect, useState, useContext, createContext} from 'react';
 import nookies from 'nookies';
-import app from './firebase-messaging-sw';
-import firebase from 'firebase/app';
+import { app } from './firebase'
 import {getAuth,  onIdTokenChanged } from 'firebase/auth';
 import "firebase/auth";
 
 const AuthContext = createContext({});
-// const auth = getAuth();
+const auth = getAuth();
 export const AuthProvider = ({children}) => 
 {
     // const app = firebaseClient();
-    const auth = getAuth();
+    const auth = getAuth(app);
     const [user, setUser] = useState(null);
     useEffect(() => {
         return(onIdTokenChanged(auth,async (user)=>
