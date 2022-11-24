@@ -1,21 +1,17 @@
 import React from "react";
-import { getAuth,onAuthStateChanged,signOut,} from "firebase/auth";
+import { getAuth,signOut,} from "firebase/auth";
 import {verifyIdToken} from "../utils/firebaseAdmin";
-// import {  } from '../services/firebase-messaging-sw';
 import { useState,useEffect, useRef } from "react";
 import Navbar from "../components/Navbar3"
 import Modal  from "../components/modal";
-// import { useNavigate, } from "react-router-dom";
 import { useRouter } from "next/router";
 import nookies from 'nookies';
-import { app } from '../utils/firebase'
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
-import { getMessaging, onMessage } from 'firebase/messaging';
 import { useAuth } from "../utils/auth";
-
+import { verifyFCMToken } from "../utils/webpush";
 
 
 function Dashboard({session})
@@ -26,7 +22,7 @@ function Dashboard({session})
   // const navigate = useNavigate();
   const {user} = useAuth();
   const router = useRouter();
-  const auth = getAuth(app);
+  // const auth = getAuth(app);
   
   // console.log("user: "+auth.currentUser);
   const navBarContent = [
@@ -77,18 +73,13 @@ function Dashboard({session})
   ])
   var [Show_table, setShow_table] = useState(false)
   const [column_Table, setcolumn_Table] = useState(
-      
     [
-     
-      
-        { field: "slNo", headerName: "Serial Number", width: 200, resizable: true, checkboxSelection: true },
-        { field: "ambulanceDriver", headerName: "Ambulance Driver", width: 200, resizable: true },
-        { field: "vehicleNumber", headerName: "VehicleNumber", width: 200, resizable: true },
-        { field: "pickupCoordinates", headerName: "Pickup Coordinates", width: 200, resizable: true },
-        { field: "status", headerName: "Status", width: 200, resizable: true },
-        { field: "severity", headerName: "Severity", width: 200, resizable: true },
-      
-      
+      { field: "slNo", headerName: "Serial Number", width: 200, resizable: true, checkboxSelection: true },
+      { field: "ambulanceDriver", headerName: "Ambulance Driver", width: 200, resizable: true },
+      { field: "vehicleNumber", headerName: "VehicleNumber", width: 200, resizable: true },
+      { field: "pickupCoordinates", headerName: "Pickup Coordinates", width: 200, resizable: true },
+      { field: "status", headerName: "Status", width: 200, resizable: true },
+      { field: "severity", headerName: "Severity", width: 200, resizable: true },
     ]
   )
  
@@ -105,20 +96,9 @@ function Dashboard({session})
     // });
 
     if(user) console.log(user.email);
+    if(user)verifyFCMToken(user.email);
 
 
-    // onAuthStateChanged(auth, (user) => {
-    //   if (user) {
-    //     // User is signed in, see docs for a list of available properties
-    //     // https://firebase.google.com/docs/reference/js/firebase.User
-    //     console.log(user.email)
-    //     // ...
-    //   } else {
-    //     // User is signed out
-    //     // ...
-    //     console.log("nobody is signed in bruh.")
-    //   }
-    // });
 
     return(
       <>
@@ -140,20 +120,20 @@ function Dashboard({session})
       
         <Modal show={showModal} onClose={()=>setShowModal(false)} >
           This is a test Notification.
-          </Modal>
+        </Modal>
           
-            <div className=" ag-theme-alpine   text-center pt-10 pl-20 text-blue-800 h-[50vh] w-[200vh]">
-                <AgGridReact
-                  ref={gridRef}   
-                  className='pt-2 text-center'
-                  rowData={table_data}
-                  columnDefs={column_Table}
-                  rowHeight={50}
-                  defaultColDef={{editable: true, filter: true, resizable: true, floatingFilter:true, sortable:true , filter:true,flex:1}}
-                  rowSelection='multiple'
-                >
-                </AgGridReact>
-              </div> 
+        <div className=" ag-theme-alpine   text-center pt-10 pl-20 text-blue-800 h-[50vh] w-[200vh]">
+          <AgGridReact
+            ref={gridRef}   
+            className='pt-2 text-center'
+            rowData={table_data}
+            columnDefs={column_Table}
+            rowHeight={50}
+            defaultColDef={{editable: true, filter: true, resizable: true, floatingFilter:true, sortable:true , filter:true,flex:1}}
+            rowSelection='multiple'
+          >
+          </AgGridReact>
+        </div> 
       </div>
         </>
     );
@@ -177,8 +157,10 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (error) {
+    //>>>To be changed
     context.res.writeHead(302,{location: "/login"});
     context.res.end();
+    //<<<
     return {props: []};
   }
 }

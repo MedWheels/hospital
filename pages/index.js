@@ -3,20 +3,18 @@ import Navbar from "../components/Navbar"
 import { useEffect,useState } from 'react'
 import Typewriter from "typewriter-effect";
 import Link from "next/link";
-import { isSupported } from "firebase/messaging";
+// import { isSupported } from "firebase/messaging";
  
 
 export default function Home() {
 
-  isSupported().then((yes) => {
-    console.log("yes")
-  }).catch((err) => {
-    console.log("no: "+err)
-  })
+  // isSupported().then((yes) => {
+  //   console.log("yes")
+  // }).catch((err) => {
+  //   console.log("no: "+err)
+  // })
 
-  const navBarContent = [
-    
-    
+  const navBarContent = [    
     {
       title: "Services",
       link: "/services",
@@ -24,75 +22,78 @@ export default function Home() {
     {
       title: "Write to us",
       link: "/wus",
-    },]
+    },
+  ]
+    
+  const [index ,setIndex] = useState(0)
+  const [index1 ,setIndex1] = useState(1)
+  const [trans , setTrans] = useState(false)
+  const [transR , setTransR] = useState(false);
+  const [activeIndex , setActiveIndex] = useState(0)
+    
 
 
-    
-    const [index ,setIndex] = useState(0)
-    const [index1 ,setIndex1] = useState(1)
-    const [trans , setTrans] = useState(false)
-    const [transR , setTransR] = useState(false);
-    const [activeIndex , setActiveIndex] = useState(0)
-     
-    useEffect(() => {
-      if(transR) {
-        setTimeout(() => {
-          setTransR(false)
-        },700)
-      }
-      
-      if(trans ) {
-        setTimeout(() => {
-          setTrans(false)
-          setIndex((index + 1) % images.length );
-          setIndex1((index1 + 1) % images.length )
-        },800)
-      }
-    }, [trans ,transR])
-    
-      const images = [
-                  { name : 'img1.jpg'},
-                  { name : 'img2.jpg'},
-                  { name : 'img3.jpg'},
-                  { name : 'img4.jpg'},
-                  { name : 'img5.jpg'},
-                  { name : 'img6.jpg'},
-                  { name : 'img7.jpg'},              
-      ]
-    
-      const handlePrev = () => {
-        setTransR(true)
-        setTrans(false)
-           const nextIndex = index - 1 ;
-           const nextIndex1 = index1 - 1 ;
-    
-          if(nextIndex1 < 0){
-            setIndex1(images.length - 1);
-          } else  {
-            setIndex1(nextIndex1)
-          }
-      
-          if(nextIndex < 0){
-            setIndex(images.length - 1);
-          } else  {
-            setIndex(nextIndex)
-          }
-        
-    
-      }
-      const handleNext = () => {
-        setTrans(true)
+  useEffect(() => {
+    if(transR) {
+      setTimeout(() => {
         setTransR(false)
+      },700)
+    }
+    
+    if(trans ) {
+      setTimeout(() => {
+        setTrans(false)
+        setIndex((index + 1) % images.length );
+        setIndex1((index1 + 1) % images.length )
+      },800)
+    }
+  }, [trans ,transR])
+    
+
+
+  const images = [
+    { name : 'img1.jpg'},
+    { name : 'img2.jpg'},
+    { name : 'img3.jpg'},
+    { name : 'img4.jpg'},
+    { name : 'img5.jpg'},
+    { name : 'img6.jpg'},
+    { name : 'img7.jpg'},              
+  ]
+
+
+  const handlePrev = () => {
+    setTransR(true)
+    setTrans(false)
+        const nextIndex = index - 1 ;
+        const nextIndex1 = index1 - 1 ;
+
+      if(nextIndex1 < 0){
+        setIndex1(images.length - 1);
+      } else  {
+        setIndex1(nextIndex1)
       }
-    
-
-
   
+      if(nextIndex < 0){
+        setIndex(images.length - 1);
+      } else  {
+        setIndex(nextIndex)
+      }
+  }
+
+
+  const handleNext = () => {
+    setTrans(true)
+    setTransR(false)
+  }
     
+
     
   var str1='<'  
   var str2='>'
 
+
+  
   return (<>
       <Navbar className="text-[#edf3f7] py-1  group-hover:text-blue-400" content={navBarContent} />
       <div className="bg-[url('/backgrounIndex.jpg')] bg-cover  

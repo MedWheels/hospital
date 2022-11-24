@@ -1,11 +1,8 @@
 import '../styles/globals.css';
 import { firebaseCloudMessaging } from '../utils/webpush';
-import { getMessaging, getToken, onMessage, onBackgroundMessage } from 'firebase/messaging';
+import { getMessaging, getToken, onMessage } from 'firebase/messaging';
 import { useEffect } from 'react';
 import { AuthProvider } from '../utils/auth';
-// import { Router } from 'next/router';
-
-// import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 
 function MyApp({ Component, pageProps }) {
@@ -27,7 +24,7 @@ function MyApp({ Component, pageProps }) {
     }
     function getMessage() {
       const messaging = getMessaging();
-      console.log({ messaging });
+      // console.log({ messaging });
       // onMessage(messaging,(payload) => {
       //   const { title, body } = JSON.parse(payload.data.notification);
       //   var options = {
@@ -36,18 +33,7 @@ function MyApp({ Component, pageProps }) {
         
       //   self.registration.showNotification(title, options);
       // });
-      onBackgroundMessage(messaging, (payload) => {
-        console.log('[firebase-messaging-sw.js] Received background message ', payload);
-        // Customize notification here
-        const notificationTitle = 'Background Message Title';
-        const notificationOptions = {
-          body: 'Background Message body.',
-          icon: '/firebase-logo.png'
-        };
-      
-        self.registration.showNotification(notificationTitle,
-          notificationOptions);
-      });
+
     }
   }, []);
 

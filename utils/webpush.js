@@ -1,7 +1,14 @@
 import 'firebase/messaging';
-import firebase, { getApps, initializeApp, getApp } from 'firebase/app';
+import { getApps, initializeApp, getApp } from 'firebase/app';
 import localforage from 'localforage';
 import { getMessaging, getToken } from 'firebase/messaging';
+import axios from 'axios';
+import { useAuth } from './auth';
+
+// const endpointsFile = require('./endpoints.json');
+// const endpoints = JSON.parse(endpointsFile);
+
+const endpoints = require('./endpoints.json');
 
 const firebaseConfig = {
 	apiKey:  process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -28,7 +35,6 @@ const firebaseCloudMessaging = {
   
 		try {
 		  const messaging = getMessaging();
-		  console.log("here")
 		  const tokenInLocalForage = await this.tokenInlocalforage();
   
 		  //if FCM token is already there just return the token
@@ -44,7 +50,7 @@ const firebaseCloudMessaging = {
 			const fcm_token = await getToken(messaging, { vapidKey: process.env.NEXT_PUBLIC_VAPID_KEY });
 			if (fcm_token) {
 			  //setting FCM token in indexed db using localforage
-			  console.log("token: "+fcm_token);
+			  console.log("new token: "+fcm_token);
 			  localforage.setItem('fcm_token', fcm_token);
 			  //return the FCM token after saving it
 			  return fcm_token;
@@ -55,5 +61,49 @@ const firebaseCloudMessaging = {
 		  return null;
 		}
 	},
-  };
-  export { firebaseCloudMessaging };
+
+
+}
+
+async function verifyFCMToken(user) {
+	// const {user} = useAuth();
+	try {
+		const tokenInLocalForage = await firebaseCloudMessaging.tokenInlocalforage();
+		const res = await axios.get(endpoints.getToken+user);
+		if(res.status===200) {
+			if(res.data.token === tokenInLocalForage){
+				console.log("Token verified.");
+				return;
+			}
+			else {
+				console.log("Updating token in database.")
+				axios.post(endpoints.setToken, {username: user, token: tokenInLocalForage}).then((res) => {
+					console.log(res);
+					console.log("Token reset successfully.");
+					return;
+				}).catch((err) => {
+					console.log(`Token verification error: ${err}`);
+					return;
+				});
+			}
+		}
+		else if(res.status===204) {
+			axios.post(endpoints.setToken, {username: user.email, token: tokenInLocalForage}).then((res) => {
+				console.log("Token reset successfully.");
+				return;
+			}).catch((err) => {
+				console.log(`Token verification error: ${err}`);
+				return;
+			});
+		}
+		else {
+			console.log("Internal Server Error.");
+			return;
+		}
+	} catch (error) {
+		console.log(error);	
+	}
+	
+}
+
+  export { firebaseCloudMessaging, verifyFCMToken };
