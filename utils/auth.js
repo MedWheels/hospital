@@ -26,7 +26,7 @@ export const AuthProvider = ({children}) =>
             nookies.set(undefined,"token",token,{});
 
         }));
-    },[]);
+    },[auth]);
     return (<AuthContext.Provider value={{user}}>{children}</AuthContext.Provider>
 )
 };
