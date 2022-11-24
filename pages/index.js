@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar"
 import { useEffect,useState } from 'react'
 import Typewriter from "typewriter-effect";
 import Link from "next/link";
+import Image from "next/image";
 // import { isSupported } from "firebase/messaging";
  
 
@@ -47,7 +48,7 @@ export default function Home() {
         setIndex1((index1 + 1) % images.length )
       },800)
     }
-  }, [trans ,transR])
+  }, [trans ,transR, images.length, index, index1]);
     
 
 
@@ -113,8 +114,12 @@ export default function Home() {
       <div className="flex flex-row space-x-10  ">
         <button className='bg-transparent h-20 ml-2 w-20 mt-[100px] text-4xl  text-sky-400  '  onClick={handlePrev}> {str1} </button>
           <div className="relative -mt-6 bg-gray-200 w-[60vh] border-2 border-sky-400 h-[40vh] overflow-hidden rounded-xl">   
-             <img  className={`absolute object-contain z-20 w-full h-full p-4  ${ trans ? 'transition duration-500 ease-linear transform -translate-x-full' : (transR ? 'animate-slideL' : "" )}`} src={images[index].name} alt=""  />
-             <img className={`absolute object-contain z-0 w-full h-full  p-4 ${trans ? 'animate-slideR' : transR ? 'transition duration-500 ease-linear transform translate-x-full'  :  '' }`} src={images[index1].name} alt="" />
+            <div className={`absolute object-contain z-20 w-full h-full p-4  ${ trans ? 'transition duration-500 ease-linear transform -translate-x-full' : (transR ? 'animate-slideL' : "" )}`}>
+              <Image src={images[index].name} alt="" />
+            </div>
+             <div className={`absolute object-contain z-0 w-full h-full  p-4 ${trans ? 'animate-slideR' : transR ? 'transition duration-500 ease-linear transform translate-x-full'  :  '' }`}>
+             <Image src={images[index1].name} alt="" />
+            </div>
           </div>
          <button className='bg-transparent h-20 w-20 mt-[100px] text-4xl  text-sky-400   ' onClick={handleNext}> {str2} </button>
 
