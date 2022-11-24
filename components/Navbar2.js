@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
  
  
 function NavBarOption({ item }) {
@@ -26,14 +27,15 @@ function Navbar({ content }) {
             <Link href="/">
               <a>
               <div className="flex flex-row ">
-                <img
-                  className="hover:scale-105 duration-200"
-                  color="#1da1f2"
-                  src="/ambulance.svg"
-                  alt="ambulance image"
-                  height={45}
-                  width={45}
-                ></img>
+              <div className="hover:scale-105 duration-200">
+                  <Image 
+                    color="#1da1f2"
+                    src="/ambulance.svg"
+                    alt="ambulance image"
+                    height={45}
+                    width={45}
+                  />
+                </div>
                 <label className="text-white font-poppins-extrabold px-3 py-3 text-lg "> MedWheels</label></div>
               </a>
             </Link>

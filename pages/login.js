@@ -134,7 +134,7 @@ function Login({}) {
                 value={email}
                 id='emailAddress'
                 placeholder={"test@gmail.com"}
-                area-describedby="email-helper-text"
+                aria-describedby="email-helper-text"
               />
               
            
@@ -196,7 +196,7 @@ function Login({}) {
                 onClick={(event) => {  setPassword(event.target.value)}}
                 value={password}
                 placeholder={"Password"}
-                area-describedby="password-helper-text"
+                aria-describedby="password-helper-text"
               ></input>
             </div>
 
