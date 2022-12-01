@@ -12,6 +12,8 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import { useAuth } from "../utils/auth";
 import { verifyFCMToken } from "../utils/webpush";
+import { onMessage, getMessaging } from "firebase/messaging";
+import {app} from "../utils/firebase"
 
 
 function Dashboard({session})
@@ -20,6 +22,7 @@ function Dashboard({session})
   const [showModal,setShowModal] = useState(false);
   const {user} = useAuth();
   const router = useRouter();
+  // const messaging = getMessaging(app);
 
   const navBarContent = [
     {
@@ -84,7 +87,8 @@ function Dashboard({session})
 
     // onMessage(messaging, (payload) => {
     //   console.log('Message received. ', payload);
-    //   alert(payload);
+    //   console.log("At Dashboard: "+payload.notification.body);
+    //   // alert(payload);
     //   // ...
     // });
 
@@ -97,6 +101,7 @@ function Dashboard({session})
       <>
       <Navbar className="text-orange-400 py-1 text-2xl group-hover:text-red-400" content={navBarContent} />
       <div className="  bg-cover min-h-screen w-full text-black">
+        
         <div className="justify-items-stretch pl-40 pt-20  ">
           <div className="relative w-full max-w-lg  py-49">
             <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
@@ -104,7 +109,6 @@ function Dashboard({session})
             <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
           </div>
         </div>
-        
         <h2 className="text-orange-500 text-4xl font-extrabold text-center"> DASHBOARD</h2>
         <h3 className="text-orange-500 text-4xl font-extrabold text-center">Hello !</h3>
         {/* <h3 className="text-orange-500 text-4xl font-extrabold text-center">Hello {auth.currentUser}!</h3> */}
