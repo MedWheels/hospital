@@ -16,15 +16,11 @@ import { verifyFCMToken } from "../utils/webpush";
 
 function Dashboard({session})
 {
-  // const app = ;
   const [editbool,setEditBool] = useState(false);
   const [showModal,setShowModal] = useState(false);
-  // const navigate = useNavigate();
   const {user} = useAuth();
   const router = useRouter();
-  // const auth = getAuth(app);
-  
-  // console.log("user: "+auth.currentUser);
+
   const navBarContent = [
     {
       title: "FAQ's",
@@ -47,9 +43,6 @@ function Dashboard({session})
       console.log(error);
     })
   }
-
-
-
 
 
 
@@ -95,7 +88,7 @@ function Dashboard({session})
     //   // ...
     // });
 
-    if(user) console.log(user.email);
+    // if(user) console.log(user.email);
     if(user)verifyFCMToken(user.email);
 
 
@@ -150,18 +143,21 @@ export async function getServerSideProps(context) {
     const cookies = nookies.get(context);
     const token = await verifyIdToken(cookies.token);
     const {uid,email} = token;
-    // console.log("current user: "+getAuth(app).currentUser);
+
     return {
       props: {
         session: `Your email is ${email} and uid is ${uid}.`
       },
     };
   } catch (error) {
-    //>>>To be changed
-    context.res.writeHead(302,{location: "/login"});
-    context.res.end();
-    //<<<
-    return {props: []};
+    //redirect to login page
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+      props: {},
+    };
   }
 }
 

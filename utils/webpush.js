@@ -4,11 +4,11 @@ import localforage from 'localforage';
 import { getMessaging, getToken } from 'firebase/messaging';
 import axios from 'axios';
 import { useAuth } from './auth';
+import endpoints from './endpoints.js';
 
 // const endpointsFile = require('./endpoints.json');
 // const endpoints = JSON.parse(endpointsFile);
 
-const endpoints = require('./endpoints.json');
 
 const firebaseConfig = {
 	apiKey:  process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
