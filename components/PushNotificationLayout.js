@@ -32,7 +32,7 @@ function PushNotificationLayout({ children }) {
 
   // Handles the click function on the toast showing push notification
   const handleClickPushNotification = (payload) => {
-    console.log("here "+payload);
+    console.log("here "+JSON.stringify(payload));
 	// router.push(url);
   };
 

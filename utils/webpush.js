@@ -88,7 +88,7 @@ async function verifyFCMToken(user) {
 			}
 		}
 		else if(res.status===204) {
-			axios.post(endpoints.setToken, {username: user.email, token: tokenInLocalForage}).then((res) => {
+			axios.post(endpoints.setToken, {username: user, token: tokenInLocalForage}).then((res) => {
 				console.log("Token reset successfully.");
 				return;
 			}).catch((err) => {
