@@ -4,11 +4,11 @@ import localforage from 'localforage';
 import { getMessaging, getToken } from 'firebase/messaging';
 import axios from 'axios';
 import { useAuth } from './auth';
+import endpoints from './endpoints.js';
 
 // const endpointsFile = require('./endpoints.json');
 // const endpoints = JSON.parse(endpointsFile);
 
-const endpoints = require('./endpoints.json');
 
 const firebaseConfig = {
 	apiKey:  process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -88,7 +88,7 @@ async function verifyFCMToken(user) {
 			}
 		}
 		else if(res.status===204) {
-			axios.post(endpoints.setToken, {username: user.email, token: tokenInLocalForage}).then((res) => {
+			axios.post(endpoints.setToken, {username: user, token: tokenInLocalForage}).then((res) => {
 				console.log("Token reset successfully.");
 				return;
 			}).catch((err) => {

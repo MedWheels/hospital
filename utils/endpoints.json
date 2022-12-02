@@ -1,6 +1,0 @@
-{
-	"getToken": "https://medwheels.vercel.app/api/hospitals/getToken?username=",
-	"setToken": "https://medwheels.vercel.app/api/hospitals/setToken",
-	"getTokenLocal": "http://localhost:4000/api/hospitals/getToken?username=",
-	"setTokenLocal": "http://localhost:4000/api/hospitals/setToken"
-}
