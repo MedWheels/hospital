@@ -5,8 +5,8 @@ import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import { useRouter } from "next/router";
 import nookies from 'nookies';
 
-import {verifyIdToken} from "../utils/firebaseAdmin";
-// import { useAuth } from "../utils/auth";
+import {verifyIdToken} from "../../utils/firebaseAdmin";
+// import { useAuth } from "../../utils/auth";
 import Navbar from "../../components/Navbar2";
 import { app } from "../../utils/firebase";
 
