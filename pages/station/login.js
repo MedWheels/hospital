@@ -5,33 +5,20 @@ import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import { useRouter } from "next/router";
 import nookies from 'nookies';
 
-import Navbar from "../components/Navbar2";
 import {verifyIdToken} from "../utils/firebaseAdmin";
 // import { useAuth } from "../utils/auth";
-import { app } from "../utils/firebase";
-
-
+import Navbar from "../../components/Navbar2";
+import { app } from "../../utils/firebase";
 
 function Login({session}) {
 
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const navigate = useNavigate();
   const router = useRouter();
-  // const {user} = useAuth(); 
   const [view, setView] = useState(false);
   const auth= getAuth(app);
  
- 
-  // const signup = () => {
-  //   createUserWithEmailAndPassword(auth,email,password)
-  //   .then(()=>{
-  //       console.log('happening');
-  //       router.push('/dashboard');
-  //   })
-  // }
-
 
   const navBarContent = [
    
@@ -51,69 +38,19 @@ function Login({session}) {
 
 
   async function signIn() {
+
     if (!auth){
-      alert("Auth problem");
+      alert("Invalid credentials.");
       return;
     }
     await signInWithEmailAndPassword(auth,email,password).then(() => {
-      // navigate("/dashboard");
-      router.push("/dashboard");
+      router.push("/station/dashboard");
     }).catch((error) =>{
         const message = error.message
         console.log("An error occured: "+message);
     });
   }
-          
-//   async function onSubmit() {
-//     if (email === " " || password === " ") {
-//       alert("Please enter your email and password");
-//     }
-//     const requestBody = {
-//       email: email,
-//       password: password,
-//     };
-//     console.log("req", requestBody);
-//     //request api here
-//     const res = await axios.get("/api/login", {
-//       params: {
-//         email: email,
-//         password: password,
-//       },
-//     });
-//     console.log(res);
-//     if (res.status === 200) {
-//       // alert("Login Successful");
-//       var data = res.data.doc;
-//       sessionStorage.setItem("email", data.email);
-//       if (data.isPc) {
-//         return Router.push("/pc");
-//       } else {
-//         if (data.type === 1) {
-//           return Router.push("/volunteer");
-//         } else if (data.type === 2) {
-//           return Router.push("/volunteer");
-//         } else if (data.type === 3) {
-//           return Router.push("/volunteer");
-//         }
-//       }
 
-//       console.log(res.data.doc);
-//     } else {
-//       alert("Login Failed");
-//     }
-    // const data = await res.json();
-    // console.log("response_data", data);
-//   }
-
-  // auth.onAuthStateChanged(user => {
-  //   // console.log(user)
-  //   if(user){
-  //     router.push("/dashboard");
-  //     return;
-  //   }
-  // })
-  // console.log("user: "+JSON.stringify(auth.currentUser));
-  
 
   return (
     <div>
@@ -233,25 +170,25 @@ function Login({session}) {
 }
 
 export async function getServerSideProps(context) {
-  try {
-    const cookies = nookies.get(context);
-    const token = await verifyIdToken(cookies.token);
-    const {uid,email} = token;
-
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/dashboard",
-      },
-      props: {
-        session: `Your email is ${email} and uid is ${uid}.`
-      },
-    };
-  } catch (error) {
-    return {
-      props: {},
-    };
+	try {
+	  const cookies = nookies.get(context);
+	  const token = await verifyIdToken(cookies.token);
+	  const {uid,email} = token;
+  
+	  return {
+		redirect: {
+		  permanent: false,
+		  destination: "/station/dashboard",
+		},
+		props: {
+		  session: `Your email is ${email} and uid is ${uid}.`
+		},
+	  };
+	} catch (error) {
+	  return {
+		props: {},
+	  };
+	}
   }
-}
 
 export default Login;
