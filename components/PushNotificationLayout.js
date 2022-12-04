@@ -40,6 +40,8 @@ function PushNotificationLayout({ children }) {
   function getMessage() {
     const messaging = getMessaging();
     onMessage(messaging,(payload) => {
+      
+      //use modal here:
       toast(
         // <div onClick={() => handleClickPushNotification(payload?.data?.url)}>
         //   <h5>{payload?.notification?.title}</h5>

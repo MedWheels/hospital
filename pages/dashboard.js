@@ -13,13 +13,10 @@ import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import { useAuth } from "../utils/auth";
 import { verifyFCMToken } from "../utils/webpush";
 import PushNotificationLayout from "../components/PushNotificationLayout";
-import { onMessage, getMessaging } from "firebase/messaging";
-import {app} from "../utils/firebase"
 
 
 function Dashboard({session})
 {
-  const [editbool,setEditBool] = useState(false);
   const [showModal,setShowModal] = useState(false);
   const {user} = useAuth();
   const router = useRouter();
@@ -115,12 +112,12 @@ function Dashboard({session})
             <h2 className="text-orange-500 text-4xl font-extrabold text-center"> DASHBOARD</h2>
             <h3 className="text-orange-500 text-4xl font-extrabold text-center">Hello {user.email}!</h3>
             {/* <h3 className="text-orange-500 text-4xl font-extrabold text-center">Hello {auth.currentUser}!</h3> */}
-            <button onClick={()=> setShowModal(true)} className="text-center p-2 rounded-md text-orange-500 border-orange-400 ml-[100vh] mt-3  border-2">Testing</button>
+            {/* <button onClick={()=> setShowModal(true)} className="text-center p-2 rounded-md text-orange-500 border-orange-400 ml-[100vh] mt-3  border-2">Testing</button> */}
             <button onClick={()=> logout()} className="text-center p-2 rounded-md text-orange-500 border-orange-400 ml-[100vh] mt-3  border-2">LOGOUT</button>
           
-            <Modal show={showModal} onClose={()=>setShowModal(false)} >
+            {/* <Modal show={showModal} onClose={()=>setShowModal(false)} >
               This is a test Notification.
-            </Modal>
+            </Modal> */}
               
             <div className=" ag-theme-alpine   text-center pt-10 pl-20 text-blue-800 h-[50vh] w-[200vh]">
               <AgGridReact
