@@ -45,7 +45,7 @@ function Login({session}) {
     },
     {
       title: "Register",
-      link: "/register",
+      link: "/stations/register",
     },
   ];
 
@@ -57,62 +57,12 @@ function Login({session}) {
     }
     await signInWithEmailAndPassword(auth,email,password).then(() => {
       // navigate("/dashboard");
-      router.push("/dashboard");
+      router.push("/stations/dashboard");
     }).catch((error) =>{
         const message = error.message
         console.log("An error occured: "+message);
     });
   }
-          
-//   async function onSubmit() {
-//     if (email === " " || password === " ") {
-//       alert("Please enter your email and password");
-//     }
-//     const requestBody = {
-//       email: email,
-//       password: password,
-//     };
-//     console.log("req", requestBody);
-//     //request api here
-//     const res = await axios.get("/api/login", {
-//       params: {
-//         email: email,
-//         password: password,
-//       },
-//     });
-//     console.log(res);
-//     if (res.status === 200) {
-//       // alert("Login Successful");
-//       var data = res.data.doc;
-//       sessionStorage.setItem("email", data.email);
-//       if (data.isPc) {
-//         return Router.push("/pc");
-//       } else {
-//         if (data.type === 1) {
-//           return Router.push("/volunteer");
-//         } else if (data.type === 2) {
-//           return Router.push("/volunteer");
-//         } else if (data.type === 3) {
-//           return Router.push("/volunteer");
-//         }
-//       }
-
-//       console.log(res.data.doc);
-//     } else {
-//       alert("Login Failed");
-//     }
-    // const data = await res.json();
-    // console.log("response_data", data);
-//   }
-
-  // auth.onAuthStateChanged(user => {
-  //   // console.log(user)
-  //   if(user){
-  //     router.push("/dashboard");
-  //     return;
-  //   }
-  // })
-  // console.log("user: "+JSON.stringify(auth.currentUser));
   
 
   return (
@@ -241,7 +191,7 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         permanent: false,
-        destination: "/dashboard",
+        destination: "/stations/dashboard",
       },
       props: {
         session: `Your email is ${email} and uid is ${uid}.`

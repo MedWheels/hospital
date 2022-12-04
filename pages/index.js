@@ -40,6 +40,10 @@ export default function Home({images}) {
       title: "Write to us",
       link: "/wus",
     },
+    {
+      title: "Station-Login",
+      link: "/stations/login",
+    },
   ]
     
   const [index ,setIndex] = useState(0)

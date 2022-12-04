@@ -40,7 +40,7 @@ function Dashboard({session})
     signOut(getAuth()).then((auth) => {
       console.log("Logged out from: "+toString(auth))
       // navigate("/login");
-      router.replace("/login");
+      router.replace("/stations/login");
     }).catch((error) => {
       console.log(error);
     })
@@ -93,12 +93,11 @@ function Dashboard({session})
 
     // if(user) console.log(user.email);
     if(user){
-      verifyFCMToken(user.email);
+      verifyFCMToken(user.email,"stations");
 
 
 
       return(
-        <>
         <PushNotificationLayout>
           <Navbar className="text-orange-400 py-1 text-2xl group-hover:text-red-400" content={navBarContent} />
           <div className="  bg-cover min-h-screen w-full text-black">
@@ -134,7 +133,6 @@ function Dashboard({session})
             </div> 
           </div>
         </PushNotificationLayout>
-          </>
       );
     }
     else{
@@ -165,7 +163,7 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         permanent: false,
-        destination: "/login",
+        destination: "/stations/login",
       },
       props: {},
     };

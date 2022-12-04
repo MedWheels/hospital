@@ -92,7 +92,7 @@ function Dashboard({session})
 
     // if(user) console.log(user.email);
     if(user){
-      verifyFCMToken(user.email);
+      verifyFCMToken(user.email,"hospitals");
 
 
 
