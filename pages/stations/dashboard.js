@@ -1,18 +1,19 @@
 import React from "react";
-import { getAuth,signOut,} from "firebase/auth";
-import {verifyIdToken} from "../utils/firebaseAdmin";
 import { useState,useEffect, useRef } from "react";
-import Navbar from "../components/Navbar3"
-import Modal  from "../components/modal";
+import { getAuth,signOut,} from "firebase/auth";
 import { useRouter } from "next/router";
 import nookies from 'nookies';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
-import { useAuth } from "../utils/auth";
-import { verifyFCMToken } from "../utils/webpush";
-import PushNotificationLayout from "../components/PushNotificationLayout";
+
+import {verifyIdToken} from "../../utils/firebaseAdmin";
+import Navbar from "../../components/Navbar3"
+import Modal  from "../../components/modal";
+import { useAuth } from "../../utils/auth";
+import { verifyFCMToken } from "../../utils/webpush";
+import PushNotificationLayout from "../../components/PushNotificationLayout";
 
 
 function Dashboard({session})
@@ -39,7 +40,7 @@ function Dashboard({session})
     signOut(getAuth()).then((auth) => {
       console.log("Logged out from: "+toString(auth))
       // navigate("/login");
-      router.replace("/login");
+      router.replace("/stations/login");
     }).catch((error) => {
       console.log(error);
     })
@@ -92,12 +93,11 @@ function Dashboard({session})
 
     // if(user) console.log(user.email);
     if(user){
-      verifyFCMToken(user.email,"hospitals");
+      verifyFCMToken(user.email,"stations");
 
 
 
       return(
-        <>
         <PushNotificationLayout>
           <Navbar className="text-orange-400 py-1 text-2xl group-hover:text-red-400" content={navBarContent} />
           <div className="  bg-cover min-h-screen w-full text-black">
@@ -133,7 +133,6 @@ function Dashboard({session})
             </div> 
           </div>
         </PushNotificationLayout>
-          </>
       );
     }
     else{
@@ -164,7 +163,7 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         permanent: false,
-        destination: "/login",
+        destination: "/stations/login",
       },
       props: {},
     };

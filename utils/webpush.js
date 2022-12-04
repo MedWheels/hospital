@@ -65,11 +65,11 @@ const firebaseCloudMessaging = {
 
 }
 
-async function verifyFCMToken(user) {
+async function verifyFCMToken(user,target) {
 	// const {user} = useAuth();
 	try {
 		const tokenInLocalForage = await firebaseCloudMessaging.tokenInlocalforage();
-		const res = await axios.get(endpoints.getToken+user);
+		const res = await axios.get(endpoints[target].getToken+user);
 		if(res.status===200) {
 			if(res.data.token === tokenInLocalForage){
 				console.log("Token verified.");
@@ -77,7 +77,7 @@ async function verifyFCMToken(user) {
 			}
 			else {
 				console.log("Updating token in database.")
-				axios.post(endpoints.setToken, {username: user, token: tokenInLocalForage}).then((res) => {
+				axios.post(endpoints[target].setToken, {username: user, token: tokenInLocalForage}).then((res) => {
 					console.log(res);
 					console.log("Token reset successfully.");
 					return;
@@ -88,7 +88,7 @@ async function verifyFCMToken(user) {
 			}
 		}
 		else if(res.status===204) {
-			axios.post(endpoints.setToken, {username: user, token: tokenInLocalForage}).then((res) => {
+			axios.post(endpoints[target].setToken, {username: user, token: tokenInLocalForage}).then((res) => {
 				console.log("Token reset successfully.");
 				return;
 			}).catch((err) => {

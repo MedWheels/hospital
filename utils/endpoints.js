@@ -1,10 +1,19 @@
+// const host = "http://localhost:4000/api"		//testing
+const host = "https://medwheels.vercel.app/api"	//production
+
 const endpoints = {
-	//testing
-	// "getToken": "http://localhost:4000/api/hospitals/getToken?username=",
-	// "setToken": "http://localhost:4000/api/hospitals/setToken",
-	//production
-	"getToken": "https://medwheels.vercel.app/api/hospitals/getToken?username=",
-	"setToken": "https://medwheels.vercel.app/api/hospitals/setToken",
+
+	hospitals:{
+		getToken: host+"/hospitals/getToken?username=",
+		setToken: host+"/hospitals/setToken",
+	},
+	stations:{
+		getToken: host+"/stations/getToken?username=",
+		setToken: host+"/stations/setToken",
+	},
+
+	accept: host+"/acceptRequest",
+
 	
 };
 
