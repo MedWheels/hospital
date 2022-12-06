@@ -56,6 +56,8 @@ function PushNotificationLayout({ children }) {
           uid:payload.data.uid,
           token:payload.data.token,
           target:payload.data.target,
+          userLat:payload.data.lat,
+          userLng:payload.data.lng
         }).then(res => {
           console.log(res);
         }).catch(err => {
